@@ -11,8 +11,8 @@ const listeAge = [...new Set(populationMain?.map((d) => d["Âge"]))];
 
 <Layout>
     <header class="bg-amber-100">
-      <a href="/" class="p-2">Accueil</a>
-      <a class="population-link" href="/population"> Voir la population </a>
+        <a href="/" class="p-2">Accueil</a>
+        <a class="population-link" href="/population"> Voir la population </a>
     </header>
     <div class="flex gap-4 mb-4 p-2">
         <select id="periode" class="p-2 border rounded">
@@ -61,6 +61,11 @@ const listeAge = [...new Set(populationMain?.map((d) => d["Âge"]))];
             let selectedSex = elmSex.value;
             let selectedAge = elmAge.value;
             const optionPlot = {
+                title: `Population française en ${selectedYear}`,
+                subtitle: `Donnes filtrées pour le sexe : ${selectedSex} et la tranche d'âge : ${selectedAge}`,
+                ariaLabel: "Carte intéractive de la population par département",
+                ariaDescription: `Cette carte chorophète affiche la population de chaque département français pour l'année ${selectedYear}.
+                Plus la couleur vert est foncée, plus la population est élevée.`,
                 projection: {
                     type: "mercator",
                     domain: departements,

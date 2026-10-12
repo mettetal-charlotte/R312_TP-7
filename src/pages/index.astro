@@ -11,16 +11,16 @@ import Layout from "../layouts/Layout.astro";
       <a class="population-link" href="/population"> Voir la population </a>
     </header>
     <div>
-      <h1 class="m-2 text-2xl">Carte des établissements</h1>
-      <p class="m-2">Explorez la localisation des établissements en France.</p>
+      <h1 id="titre-carte" class="m-2 text-2xl">Carte des établissements</h1>
+      <p id="desc-carte" class="m-2">Explorez la localisation des établissements en France.</p>
     </div>
-    <div id="map" style="height: 600px;"></div>
+    <div id="map" style="height: 600px;" role="region" aria-labelledby="Carte des établissements" aria-describedby="La carte localise les différents établissemnts français avec des ronds rouges"></div>
   </main>
 
   <script>
     import listeEtablissements from "../assets/listeEtablissements.json";
     import L from "leaflet";
-    
+
     const map = L.map("map").setView([46.6033, 1.883], 6);
     // ... https://leafletjs.com/examples/quick-start/
     // ...
