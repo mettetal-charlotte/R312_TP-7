@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
       <a class="population-link" href="/population"> Voir la population </a>
     </header>
     <div>
-      <h1 class="m-2">Carte des établissements</h1>
+      <h1 class="m-2 text-2xl">Carte des établissements</h1>
       <p class="m-2">Explorez la localisation des établissements en France.</p>
     </div>
     <div id="map" style="height: 600px;"></div>
@@ -19,12 +19,9 @@ import Layout from "../layouts/Layout.astro";
 
   <script>
     import listeEtablissements from "../assets/listeEtablissements.json";
-
-    // Import de la bibliothèque Leaflet pour créer la carte interactive
     import L from "leaflet";
-    // Dans l'élément d'ID "map" : création de la carte centrée sur la France (lat: 46.6033, lon: 1.883) avec un zoom niveau 6
+    
     const map = L.map("map").setView([46.6033, 1.883], 6);
-
     // ... https://leafletjs.com/examples/quick-start/
     // ...
 
