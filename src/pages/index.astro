@@ -1,21 +1,46 @@
 ---
-import PlotFigure from "../components/PlotFigure.astro";
+// Import des styles CSS de Leaflet pour l'affichage de la carte
+import "leaflet/dist/leaflet.css";
 import Layout from "../layouts/Layout.astro";
-import * as Plot from "@observablehq/plot";
-import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+  <main>
+    <header class="bg-amber-100">
+      <a href="/" class="p-2">Accueil</a>
+      <a class="population-link" href="/population"> Voir la population </a>
+    </header>
+    <div>
+      <h1 class="m-2">Carte des établissements</h1>
+      <p class="m-2">Explorez la localisation des établissements en France.</p>
+    </div>
+    <div id="map" style="height: 600px;"></div>
+  </main>
+
+  <script>
+    import listeEtablissements from "../assets/listeEtablissements.json";
+
+    // Import de la bibliothèque Leaflet pour créer la carte interactive
+    import L from "leaflet";
+    // Dans l'élément d'ID "map" : création de la carte centrée sur la France (lat: 46.6033, lon: 1.883) avec un zoom niveau 6
+    const map = L.map("map").setView([46.6033, 1.883], 6);
+
+    // ... https://leafletjs.com/examples/quick-start/
+    // ...
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+
+    listeEtablissements.forEach((et) => {
+      const dot = L.circleMarker([et.lat, et.lon], {
+        color: "red",
+        radius: 2,
+        fillColor: "red",
+        opacity: 0.25,
+      }).addTo(map);
+      dot.bindPopup(et.name);
+    });
+  </script>
 </Layout>
